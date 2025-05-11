@@ -25,9 +25,22 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
 **Explanation of Code**
 - Loading: load_dataset("emotion") fetches the dataset from Hugging Face’s servers.
 - Conversion: The dataset is split into train, test, and validation sets, converted to Pandas DataFrames for easy handling.
--Exploration: explore_dataset prints the first 5 rows, data types, and emotion distribution to check for class imbalance or missing values.
--Saving: CSV files are saved in data/ for use in preprocessing (Step 2).
--Modularity: The script is placed in scripts/ to keep the project organized.
+- Exploration: explore_dataset prints the first 5 rows, data types, and emotion distribution to check for class imbalance or missing values.
+- Saving: CSV files are saved in data/ for use in preprocessing (Step 2).
+- Modularity: The script is placed in scripts/ to keep the project organized.
 
+## Progress
+- **Step 2: Preprocess the Data**: Implemented text cleaning, tokenization, and sequence padding in `scripts/preprocess_data.py`.
+- Cleaning: clean_text: Lowercases text, removes punctuation, and optionally removes stopwords. Stopwords removal is included but can be skipped for emotion detection (small words like “I” may carry emotional weight).
+- Tokenization:
+    - Tokenizer: Builds a vocabulary of up to max_words (5000) words, with <OOV> for unknown words.
+    - fit_on_texts: Uses training data to create the vocabulary.
+    - texts_to_sequences: Converts text to integer sequences.
+- Padding:
+     - pad_sequences: Pads sequences to max_len (100) with zeros or truncates them.
+     - padding='post', truncating='post': Adds zeros or cuts off at the end.
+- Label Encoding:
+    - pd.get_dummies: Converts labels (0–5) to one-hot vectors (e.g., [1, 0, 0, 0, 0, 0] for sadness).
+- Saving: Saves preprocessed data as .npy files for efficient loading in training.
 ## License
 MIT License
