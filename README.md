@@ -70,6 +70,8 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
 ## Progress
 - **Step 5: Save the Model**: Saved the trained Bidirectional LSTM model in .keras format and verified predictions in `scripts/save_verify_model.py`. Model saved to `models/emotion_model.keras`.
 
+## Progress
+- **Step 6: Deployment**: Created an inference script to predict emotions from new text inputs using the saved model and tokenizer in `scripts/inference.py`. Tokenizer saved to `models/tokenizer.pkl`.
 
 
 ## License
