@@ -42,5 +42,17 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
 - Label Encoding:
     - pd.get_dummies: Converts labels (0–5) to one-hot vectors (e.g., [1, 0, 0, 0, 0, 0] for sadness).
 - Saving: Saves preprocessed data as .npy files for efficient loading in training.
+
+## Progress
+- **Step 3: Create the Model**: Built a Bidirectional LSTM model with Embedding and Dropout layers in `scripts/build_model.py`. Saved model summary to `models/model_summary.txt`.
+
+## 🌟 Expected Outcome
+- The Bidirectional LSTM model is built and compiled correctly.
+- Model summary is saved in models/model_summary.txt.
+- scripts/build_model.py is updated and committed.
+- Changes are pushed to your GitHub repository (https://github.com/didar-ali-deed/emotion-detection-lstm).
+
+
+
 ## License
 MIT License
