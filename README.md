@@ -73,6 +73,8 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
 ## Progress
 - **Step 6: Deployment**: Created an inference script to predict emotions from new text inputs using the saved model and tokenizer in `scripts/inference.py`. Tokenizer saved to `models/tokenizer.pkl`.
 
+## Progress
+- **Step 7: Create a Flask API**: Developed a Flask API to serve the emotion detection model, accepting text inputs via POST requests in `scripts/api.py`. Accessible at `http://localhost:5000/predict`.
 
 ## License
 MIT License
