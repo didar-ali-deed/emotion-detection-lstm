@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.ipynb_checkpoints/
+
+# Anaconda environment
+env/
+*.egg-info/
+
+# Data and models
+data/*
+models/*
+!data/.gitkeep
+!models/.gitkeep
+
+# Jupyter notebooks
+notebooks/*.ipynb
+
+# Misc
+.DS_Store
+*.log
