@@ -53,6 +53,21 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
 - Changes are pushed to your GitHub repository (https://github.com/didar-ali-deed/emotion-detection-lstm).
 
 
+## Progress
+- **Step 4: Train and Evaluate**: Trained the Bidirectional LSTM model and evaluated it with accuracy, confusion matrix, and F1 score in `scripts/train_evaluate.py`. Saved trained model to `models/emotion_model.h5` and confusion matrix to `models/confusion_matrix.png`.
+
+## Explanation of Code
+- Model: Reuses the Bidirectional LSTM from Step 3 for consistency.
+- Training:
+    - model.fit: Trains for 10 epochs with batch size 32, using validation data to monitor performance.
+    - Epochs and batch size are chosen for balance; adjust if needed (e.g., increase epochs if underfitting).
+- Evaluation:
+    - model.evaluate: Computes test accuracy.
+    - classification_report: Provides precision, recall, and F1 score per class.
+    - confusion_matrix: Shows correct and incorrect predictions per class.
+- Visualization: plot_confusion_matrix creates a heatmap of the confusion matrix, saved as a PNG.
+
+
 
 ## License
 MIT License
