@@ -22,3 +22,11 @@ notebooks/*.ipynb
 # Misc
 .DS_Store
 *.log
+
+data/*
+!data/.gitkeep
+
+models/*
+!models/.gitkeep
+
+LICENSE

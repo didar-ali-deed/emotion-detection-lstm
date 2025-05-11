@@ -42,17 +42,14 @@ model, tokenizer = load_model_and_tokenizer(model_path, tokenizer_path)
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """
-    Predict emotion for input text.
-    Expects JSON: {"text": "input text"}
-    Returns JSON: {"emotion": "predicted_emotion", "confidence": float}
-    """
     try:
         data = request.get_json()
+        print(f"Received JSON: {data}")  # Log input
         if not data or 'text' not in data:
             return jsonify({'error': 'Missing "text" in JSON'}), 400
 
         text = data['text']
+        print(f"Processing text: {text}")  # Log text
         cleaned_text = clean_text(text)
         sequence = tokenizer.texts_to_sequences([cleaned_text])
         padded_sequence = pad_sequences(sequence, maxlen=100, padding='post', truncating='post')
@@ -62,10 +59,12 @@ def predict():
         pred_label = emotion_labels[np.argmax(prediction)]
         confidence = float(prediction[0].max())
 
+        print(f"Prediction: {pred_label}, Confidence: {confidence}")  # Log output
         return jsonify({'emotion': pred_label, 'confidence': confidence})
 
     except Exception as e:
+        print(f"Error: {str(e)}")  # Log error
         return jsonify({'error': str(e)}), 500
-
+    
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=5000)
