@@ -6,6 +6,7 @@ import nltk
 from nltk.corpus import stopwords
 from tensorflow.keras.preprocessing.text import Tokenizer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
+import pickle
 import os
 
 # Download NLTK stopwords
@@ -15,30 +16,15 @@ stop_words = set(stopwords.words('english'))
 def clean_text(text):
     """
     Clean text by lowercasing, removing punctuation, and stopwords.
-    Args:
-        text (str): Input text.
-    Returns:
-        str: Cleaned text.
     """
-    # Convert to lowercase
     text = text.lower()
-    # Remove punctuation and special characters
     text = re.sub(r'[^\w\s]', '', text)
-    # Remove stopwords (optional, can be skipped for emotion detection)
     text = ' '.join(word for word in text.split() if word not in stop_words)
     return text
 
 def preprocess_data(data_dir="../data", max_words=5000, max_len=100):
     """
     Preprocess the Emotion dataset: clean, tokenize, pad, and encode labels.
-    Args:
-        data_dir (str): Directory with CSV files.
-        max_words (int): Maximum vocabulary size.
-        max_len (int): Maximum sequence length.
-    Returns:
-        X_train, X_test, X_val: Padded sequences.
-        y_train, y_test, y_val: One-hot encoded labels.
-        tokenizer: Fitted Keras Tokenizer.
     """
     # Load CSV files
     train_df = pd.read_csv(os.path.join(data_dir, "emotion_train.csv"))
@@ -77,13 +63,17 @@ def preprocess_data(data_dir="../data", max_words=5000, max_len=100):
     np.save(os.path.join(data_dir, 'y_test.npy'), y_test)
     np.save(os.path.join(data_dir, 'y_val.npy'), y_val)
 
+    # Save tokenizer
+    models_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'models'))
+    os.makedirs(models_dir, exist_ok=True)
+    tokenizer_path = os.path.join(models_dir, 'tokenizer.pkl')
+    with open(tokenizer_path, 'wb') as f:
+        pickle.dump(tokenizer, f)
+
     return X_train, X_test, X_val, y_train, y_test, y_val, tokenizer
 
 if __name__ == "__main__":
-    # Preprocess the data
     X_train, X_test, X_val, y_train, y_test, y_val, tokenizer = preprocess_data()
-
-    # Print shapes to verify
     print("X_train shape:", X_train.shape)
     print("y_train shape:", y_train.shape)
     print("X_test shape:", X_test.shape)
@@ -92,3 +82,4 @@ if __name__ == "__main__":
     print("y_val shape:", y_val.shape)
     print("Sample tokenized sequence:", X_train[0])
     print("Sample label (one-hot):", y_train[0])
+    print("Tokenizer saved to models/tokenizer.pkl")
