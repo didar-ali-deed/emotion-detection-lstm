@@ -67,6 +67,9 @@ This project uses a Bidirectional LSTM model to classify emotions (e.g., joy, sa
     - confusion_matrix: Shows correct and incorrect predictions per class.
 - Visualization: plot_confusion_matrix creates a heatmap of the confusion matrix, saved as a PNG.
 
+## Progress
+- **Step 5: Save the Model**: Saved the trained Bidirectional LSTM model in .keras format and verified predictions in `scripts/save_verify_model.py`. Model saved to `models/emotion_model.keras`.
+
 
 
 ## License
